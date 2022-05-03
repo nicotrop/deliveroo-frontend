@@ -1,5 +1,5 @@
 .App {
-  width: 85vw;
+  width: 100vw;
   margin: 0% auto;
   box-sizing: border-box;
 }
@@ -22,7 +22,7 @@
     background-color: white;
     height: 80px;
     box-sizing: border-box;
-    border-bottom: 2px gray solid;
+    border-bottom: 1px solid #e9ebeb;
     margin-bottom: 10px;
     padding: 0px 0px 10px;
   }
@@ -35,7 +35,7 @@
 
   .top-content {
     background-color: white;
-    height: 260px;
+    height: 220px;
     display: flex;
 
     .left-col {
@@ -43,6 +43,11 @@
       height: 100%;
       box-sizing: border-box;
       padding: 10px 10px;
+      margin-right: 20px;
+
+      p {
+        line-height: 28px;
+      }
     }
 
     .right-col {

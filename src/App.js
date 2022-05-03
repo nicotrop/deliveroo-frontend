@@ -12,6 +12,10 @@ library.add(faStar);
 function App() {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [cart, setCart] = useState([]);
+  const [totals, setTotals] = useState(0);
+  const [delivery] = useState("2.50");
+  const [subTotal, setSubtotal] = useState(2.5);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,6 +35,43 @@ function App() {
       fetchData();
     }, 3000);
   }, []);
+
+  const handleAddToCart = (dish, index) => {
+    const cartTab = [...cart];
+    if (cartTab.filter((element) => (element.id === dish[0].id).length > 1)) {
+      cartTab[index].qty += 1;
+      cartTab[index].total = cartTab[index].qty * cartTab[index].price;
+      setCart(cartTab);
+      setTotals(totals + cartTab[index].total);
+      setSubtotal(subTotal + totals);
+    } else {
+      dish.qty = 1;
+      dish.total = dish.qty * Number(dish.price);
+      cartTab.push(dish);
+      setCart(cartTab);
+      setTotals(totals + dish.total);
+      setSubtotal(subTotal + totals);
+    }
+    console.log(cartTab);
+  };
+
+  const handleMinus = (num) => {
+    const cartArr = [...cart];
+    cartArr.splice(num, 1);
+    setCart(cartArr);
+    setTotals(totals - Number(cart[num].price));
+    console.log(num);
+    console.log(cart[num].price);
+    // console.log(cartArr);
+  };
+
+  const handlePlus = (item) => {
+    const cartArr = [...cart];
+    cartArr.push(item);
+    setCart(cartArr);
+    console.log(item);
+    console.log(cartArr);
+  };
 
   return isLoading ? (
     <div className="App">
@@ -63,7 +104,7 @@ function App() {
           </div>
         </div>
       </section>
-      <section className="main">
+      <section className="main full-bg">
         <div className="col-1">
           {data.categories.map((cat, index) => {
             return (
@@ -74,7 +115,13 @@ function App() {
                     <div className="card-container">
                       {data.categories[index].meals.map((dish, i) => {
                         return (
-                          <div className="cat-card" key={i}>
+                          <div
+                            className="cat-card"
+                            key={i}
+                            onClick={() => {
+                              handleAddToCart(dish);
+                            }}
+                          >
                             <div
                               className={
                                 dish.picture ? "left-side" : "full-width"
@@ -124,7 +171,44 @@ function App() {
               <h3>Valider mon panier</h3>
             </button>
             <div className="my-cart">
-              <span>Votre panier est vide</span>
+              {cart.length > 0 ? (
+                <div className="cart-wrapper">
+                  {cart.map((item, index) => {
+                    return (
+                      <div className="items-ordered" key={index}>
+                        <div className="controls">
+                          <button
+                            onClick={() => {
+                              handleMinus(index);
+                            }}
+                          >
+                            -
+                          </button>
+                          <span>1</span>
+                          <button>+</button>
+                        </div>
+                        <div className="name">
+                          <span>{item.title}</span>
+                        </div>
+                        <div className="price">
+                          <span>{item.price} €</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <div className="sous-total">
+                    <span>Sous-total</span> <span>{totals} €</span>
+                  </div>
+                  <div className="shipping">
+                    <span>Frais de livraison</span> <span>{delivery} €</span>
+                  </div>
+                  <div className="total">
+                    <span>Total </span> <span>{subTotal} €</span>
+                  </div>
+                </div>
+              ) : (
+                <span className="empty-cart">Votre panier est vide</span>
+              )}
             </div>
           </div>
         </div>

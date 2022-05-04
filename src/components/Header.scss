@@ -42,6 +42,8 @@
 
   .top-content {
     background-color: white;
+    display: flex;
+    justify-content: center;
 
     .desc {
       height: 220px;

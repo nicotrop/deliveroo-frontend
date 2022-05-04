@@ -70,6 +70,9 @@ const Cart = ({
           )}
         </div>
       </div>
+      <div className="cart-small">
+        <button></button>
+      </div>
     </div>
   );
 };

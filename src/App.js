@@ -1,7 +1,7 @@
 import "./App.css";
-import "/Users/nicolastroplent/Downloads/LeReacteur/Javascript/Day-26/deliveroo-replica/src/components/Main.scss";
-import "/Users/nicolastroplent/Downloads/LeReacteur/Javascript/Day-26/deliveroo-replica/src/components/Header.scss";
-import "/Users/nicolastroplent/Downloads/LeReacteur/Javascript/Day-26/deliveroo-replica/src/components/Responsive.scss";
+import "./components/Main.scss";
+import "./components/Header.scss";
+import "./components/Responsive.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";

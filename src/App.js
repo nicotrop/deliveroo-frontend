@@ -27,7 +27,6 @@ function App() {
         );
         setData(response.data);
         setIsLoading(false);
-        // console.log(response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -87,16 +86,13 @@ function App() {
   };
 
   return isLoading ? (
-    <div className="App">
-      <section className="header">
-        <div className="logo-bar">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/fr/f/f7/Deliveroo_logo.svg"
-            alt="deliveroo blue logo"
-          />
-        </div>
-        <h2 className="loading">En cours de chargement...</h2>
-      </section>
+    <div className="loading">
+      <img
+        className="spinner"
+        src="https://upload.wikimedia.org/wikipedia/fr/f/f7/Deliveroo_logo.svg"
+        alt="deliveroo blue logo"
+        width="200"
+      />
     </div>
   ) : (
     <div className="App">
